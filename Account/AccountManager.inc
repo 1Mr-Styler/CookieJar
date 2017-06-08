@@ -38,13 +38,29 @@ class AccountManager
 
     public function getDetails($user)
     {
-        $sql = "SELECT * FROM `bank` WHERE `user` = '{$user}'";
+        $sql = "SELECT * FROM `bank` WHERE `user` = '{$user}'"; //prepare SQL statement
+
+        $result = Query::run($sql); //execute SQL statement
+
+        $rows = $result->fetch_assoc(); //Get rows from the table from the SQL statement
+
+        return $rows; //return the rows
+    }
+
+    public function userExists($user)
+    {
+        $sql = "SELECT count(*) FROM `bank` WHERE `user` = '{$user}'";
 
         $result = Query::run($sql);
 
-        $rows = $result->fetch_assoc();
+        $rows = $result->fetch_row();
 
-        return $rows;
+        if ($rows[0] == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-}
+}//isnt this the end of the class?? why are you creating a function outside the class????
+

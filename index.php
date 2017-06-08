@@ -10,10 +10,18 @@ include "Connection/Database.inc";
 include "Account/AccountManager.inc";
 
 $accManager = new AccountManager();
-$details = $accManager->getDetails("rose22");
 
-echo "Your account balance is: $" . $details['balance'];
-echo "\n"; //this is the same thing as echo "<br>";
-echo "Your account password is: " . $details['pass'];
-echo "\n";
-echo "Your account Number is: " . $details['acc'];
+$user = "stylr11";
+
+$q = $accManager->userExists($user);
+if ($q) {
+    $details = $accManager->getDetails("serikov21");
+
+    echo "Your account balance is: $" . $details['balance'];
+    echo "\n";
+    echo "Your account password is: " . $details['pass'];
+    echo "\n";
+    echo "Your account Number is: " . $details['acc'];
+} else {
+    echo $user . " is an incorrect username";
+}
